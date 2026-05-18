@@ -1,0 +1,134 @@
+Create a pixel-accurate replica of the NDTV news website homepage as a 
+fully responsive HTML/CSS/JS single-page layout. Follow these exact specifications:
+
+---
+
+### COLOR SCHEME
+- Background: #1a1a1a (dark charcoal, almost black)
+- Top navbar: #000000 (pure black)
+- Trending bar: #1c1c1c with a thin red left border accent
+- Primary accent / red: #e2001a (NDTV red)
+- Text (headlines): #ffffff (white)
+- Text (secondary/meta): #999999 (gray)
+- Card backgrounds: #242424
+- Sidebar/panel background: #1e1e1e
+- Border/divider: #333333
+- Live indicator dot: #e2001a (animated pulse)
+- "Updates" tag: #e2001a background, white text
+
+---
+
+### TOP NAVIGATION BAR (black, full width)
+Left side:
+- Hamburger menu icon (≡)
+- NDTV logo in white/red (bold sans-serif, "ND" white + "TV" red)
+
+Center:
+- Nav links (white, small, ~13px): 
+  "• Live TV ▾" | "Latest" | "India ▾" | "World" | "Videos" | 
+  "Opinion" | "Cities ▾" | "Education ▾" | "≡ ▾"
+
+Right side:
+- City name "Delhi" + temperature "☁ 38°C"
+- Grid/app icon
+- User avatar icon
+
+---
+
+### TRENDING LINKS BAR (just below navbar)
+- Left label: "TRENDING LINKS ▶" in red background
+- Links: "Iran War" | "IPL 2026" | "Gold Price" | "Silver Price"
+- Background: dark gray (#1c1c1c), thin red left-side accent
+
+---
+
+### BREADCRUMB / SUB-NAV
+- Small text: "News › Latest News" in gray
+
+---
+
+### MAIN LAYOUT (3-column grid)
+
+#### LEFT SIDEBAR (~20% width)
+- Section: "Trending News" (white bold header)
+- Numbered list (1–4+) of trending story titles in white text, ~14px
+- Below list: Cricket scoreboard widget
+  - Dark green background card
+  - Teams: "SRH vs CSK", score "75/2", overs "DVR 16.0"
+  - Player stats: "Ishan Kishan 24 20", "Abhishek 18 13"
+  - Bowling: "Mukesh... 1/19"
+  - Label: "Match LIVE" in green
+
+#### CENTER CONTENT (~55% width)
+- Section header: "LATEST NEWS" (bold white) + Share icon (gray)
+- News cards: each card has:
+  - Thumbnail image (left-aligned, ~160x110px)
+  - Headline (white, bold, ~17px, 2 lines max)
+  - Meta: date, time, reporter name in gray ~11px
+  - 2-line excerpt/description in light gray ~13px
+  - Share button (gray, small, bottom right)
+- Divider line between cards (#333333)
+
+#### RIGHT SIDEBAR (~25% width)
+- "Quick Links ▶" panel (dark background)
+  - Grid of links: "Latest News", "PNR Status", "Education News", 
+    "Business News", "Sports News", "US Iran War News", 
+    "VD Satheean Oath Ceremony LIVE", "Stock Market LIVE Updates",
+    "Deepika Nagar Dowry Death", "Twisha Sharma"
+  - Each link: white text, ~12px, separated by light dividers
+
+---
+
+### HOMEPAGE HERO SECTION (above Latest News, visible on main page)
+3-column card grid:
+- LEFT: Large hero card (~40% width)
+  - Full bleed image (dark photo)
+  - White headline overlay at bottom
+  - Example: "US Drops All Charges Against Gautam Adani, Case Closed Permanently"
+
+- CENTER: 2 stacked cards
+  - Each: small thumbnail left + headline right (~14px white)
+  - Below: text-only headline links in white, 13px
+
+- RIGHT: "Watch Live" panel
+  - Red bullet + "Watch Live" header
+  - Embedded live stream thumbnail with NDTV branding
+  - Overlay text: "MULTIPLE U.S. CASES NOW CLOSED", "DOJ CRIMINAL CASE DISMISSED"
+  - "BREAKING NEWS" red badge
+  - Below: "Opinion ▶" section header
+  - 2 opinion cards: small circular author photo + headline + author name in gray
+
+---
+
+### NDTV WORLD SUB-SITE VARIANT (news 4 image)
+Separate top nav:
+- Network bar: "NDTV | WORLD | PROFIT | हिं | MOVIES | CRICKET | FOOD | 
+  LIFESTYLE | HEALTH | TECH | GAMES | SHOPPING | APPS | RAJASTHAN | MPCG | MARATHI"
+- Logo: "NDTV WORLD" (white + red)
+- Geo nav: "US | UK | Middle East | India Global | Asia | Europe | 
+  Australia | Americas | Africa | Videos | Sports | ≡ ▾"
+
+---
+
+### TYPOGRAPHY
+- Font family: system-ui, -apple-system, "Segoe UI", Arial, sans-serif
+- Headline size: 18–22px bold
+- Sub-headline: 14–16px semi-bold
+- Body/meta text: 11–13px regular
+- All text: white or light gray on dark backgrounds
+
+---
+
+### INTERACTIONS
+- Hover on nav links: underline or slight brightness increase
+- Hover on news cards: slight background highlight (#2e2e2e)
+- "Live TV" link: animated red pulsing dot before text
+- Trending bar items: hover turns text red (#e2001a)
+
+---
+
+### OVERALL FEEL
+Dark-mode news portal. Dense information layout. 
+No wasted whitespace. Professional broadcast journalism aesthetic.
+Red-on-black branding throughout.
+Mobile responsive: stack columns vertically on small screens.

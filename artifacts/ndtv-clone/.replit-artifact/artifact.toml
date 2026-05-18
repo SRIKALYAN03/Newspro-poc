@@ -1,0 +1,31 @@
+kind = "web"
+previewPath = "/"
+title = "NDTV News Homepage"
+version = "1.0.0"
+id = "artifacts/ndtv-clone"
+router = "path"
+
+[[integratedSkills]]
+name = "react-vite"
+version = "1.0.0"
+
+[[services]]
+name = "web"
+paths = [ "/" ]
+localPort = 21392
+
+[services.development]
+run = "pnpm --filter @workspace/ndtv-clone run dev"
+
+[services.production]
+build = [ "pnpm", "--filter", "@workspace/ndtv-clone", "run", "build" ]
+publicDir = "artifacts/ndtv-clone/dist/public"
+serve = "static"
+
+[[services.production.rewrites]]
+from = "/*"
+to = "/index.html"
+
+[services.env]
+PORT = "21392"
+BASE_PATH = "/"
