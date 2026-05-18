@@ -1,17 +1,22 @@
+import { useState } from "react";
 import TopNav from "@/components/TopNav";
 import TrendingBar from "@/components/TrendingBar";
 import HeroSection from "@/components/HeroSection";
 import LatestNews from "@/components/LatestNews";
 import LeftSidebar from "@/components/LeftSidebar";
 import RightSidebar from "@/components/RightSidebar";
+import SearchOverlay from "@/components/SearchOverlay";
 import { Link } from "wouter";
 
 export default function Home() {
+  const [searchOpen, setSearchOpen] = useState(false);
+
   return (
     <div className="min-h-screen bg-background flex flex-col font-sans">
-      <TopNav />
+      <SearchOverlay isOpen={searchOpen} onClose={() => setSearchOpen(false)} />
+      <TopNav onSearchOpen={() => setSearchOpen(true)} />
       <TrendingBar />
-      
+
       <main className="flex-1 w-full max-w-7xl mx-auto px-4 py-3 flex flex-col gap-4">
         {/* BREADCRUMB */}
         <div className="text-[11px] text-muted-foreground mb-1 uppercase tracking-wider font-semibold">

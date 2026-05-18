@@ -1,7 +1,11 @@
-import { Menu, Search, Grid, User, Play } from "lucide-react";
+import { Menu, Search, Grid, User } from "lucide-react";
 import { Link } from "wouter";
 
-export default function TopNav() {
+interface TopNavProps {
+  onSearchOpen: () => void;
+}
+
+export default function TopNav({ onSearchOpen }: TopNavProps) {
   return (
     <header className="flex flex-col w-full">
       {/* NETWORK BAR */}
@@ -32,7 +36,7 @@ export default function TopNav() {
           <span className="hover:text-white cursor-pointer hidden xl:inline">SHOPPING</span>
         </div>
         <div className="flex items-center space-x-3 shrink-0 ml-4">
-          <Search className="w-3.5 h-3.5 cursor-pointer hover:text-white" />
+          <Search className="w-3.5 h-3.5 cursor-pointer hover:text-white" onClick={onSearchOpen} data-testid="button-search" />
         </div>
       </div>
 
