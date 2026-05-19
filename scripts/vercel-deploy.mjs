@@ -27,11 +27,18 @@ function writePublic(targetDir) {
   console.log(`  files: ${readdirSync(targetDir).join(", ")}`);
 }
 
-// Repo root (static-build distDir "public")
-writePublic(join(root, "public"));
+// All paths where Vercel may look for "public" (depends on Root Directory setting)
+const targets = [
+  join(root, "public"),
+  join(root, "artifacts", "api-server", "public"),
+  join(root, "artifacts", "ndtv-clone", "public"),
+];
 
-// If Vercel Root Directory is a subfolder, also write public/ there
 const cwd = process.cwd();
-if (cwd !== root) {
-  writePublic(join(cwd, "public"));
+if (!targets.includes(join(cwd, "public"))) {
+  targets.push(join(cwd, "public"));
+}
+
+for (const dir of targets) {
+  writePublic(dir);
 }
