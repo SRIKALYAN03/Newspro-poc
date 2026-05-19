@@ -7,7 +7,13 @@ const root = join(dirname(fileURLToPath(import.meta.url)), "..");
 const appDist = join(root, "artifacts", "ndtv-clone", "dist");
 const outDir = join(root, "public");
 
-execSync("pnpm --filter @workspace/ndtv-clone build", { cwd: root, stdio: "inherit" });
+const env = { ...process.env, NODE_ENV: "production" };
+
+execSync("pnpm --filter @workspace/ndtv-clone exec vite build --config vite.config.ts", {
+  cwd: root,
+  stdio: "inherit",
+  env,
+});
 
 if (!existsSync(join(appDist, "index.html"))) {
   console.error(`Missing ${join(appDist, "index.html")} — Vite build did not produce output.`);
