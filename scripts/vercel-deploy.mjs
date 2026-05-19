@@ -1,11 +1,10 @@
-import { cpSync, existsSync, mkdirSync, rmSync } from "node:fs";
+import { cpSync, existsSync, mkdirSync, readdirSync, rmSync } from "node:fs";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
 import { execSync } from "node:child_process";
 
 const root = join(dirname(fileURLToPath(import.meta.url)), "..");
 const appDist = join(root, "artifacts", "ndtv-clone", "dist");
-const outDir = join(root, "public");
 
 const env = { ...process.env, NODE_ENV: "production" };
 
@@ -20,8 +19,19 @@ if (!existsSync(join(appDist, "index.html"))) {
   process.exit(1);
 }
 
-rmSync(outDir, { recursive: true, force: true });
-mkdirSync(outDir, { recursive: true });
-cpSync(appDist, outDir, { recursive: true });
+function writePublic(targetDir) {
+  rmSync(targetDir, { recursive: true, force: true });
+  mkdirSync(targetDir, { recursive: true });
+  cpSync(appDist, targetDir, { recursive: true });
+  console.log(`Deployed static files → ${targetDir}`);
+  console.log(`  files: ${readdirSync(targetDir).join(", ")}`);
+}
 
-console.log(`Copied ${appDist} → ${outDir}`);
+// Repo root (static-build distDir "public")
+writePublic(join(root, "public"));
+
+// If Vercel Root Directory is a subfolder, also write public/ there
+const cwd = process.cwd();
+if (cwd !== root) {
+  writePublic(join(cwd, "public"));
+}
