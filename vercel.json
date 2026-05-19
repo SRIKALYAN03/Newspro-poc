@@ -1,17 +1,7 @@
 {
-  "version": 2,
+  "$schema": "https://openapi.vercel.sh/vercel.json",
   "installCommand": "pnpm install",
-  "builds": [
-    {
-      "src": "artifacts/ndtv-clone/package.json",
-      "use": "@vercel/static-build",
-      "config": {
-        "distDir": "dist"
-      }
-    }
-  ],
-  "routes": [
-    { "handle": "filesystem" },
-    { "src": "/(.*)", "dest": "/index.html" }
-  ]
+  "buildCommand": "pnpm --filter @workspace/ndtv-clone build",
+  "outputDirectory": "artifacts/ndtv-clone/dist",
+  "rewrites": [{ "source": "/(.*)", "destination": "/index.html" }]
 }
