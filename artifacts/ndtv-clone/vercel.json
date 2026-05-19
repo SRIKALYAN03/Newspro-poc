@@ -1,6 +1,0 @@
-{
-  "installCommand": "cd ../.. && pnpm install",
-  "buildCommand": "pnpm run build",
-  "outputDirectory": "dist",
-  "rewrites": [{ "source": "/(.*)", "destination": "/index.html" }]
-}
