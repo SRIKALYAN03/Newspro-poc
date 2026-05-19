@@ -1,0 +1,6 @@
+{
+  "installCommand": "pnpm install",
+  "buildCommand": "pnpm --filter @workspace/ndtv-clone build",
+  "outputDirectory": "artifacts/ndtv-clone/dist/public",
+  "rewrites": [{ "source": "/(.*)", "destination": "/index.html" }]
+}
