@@ -1,90 +1,113 @@
-import { Menu, Search, Grid, User } from "lucide-react";
-import { Link } from "wouter";
+import { Menu, Search, Radio, PenLine } from "lucide-react";
+import { Link, useLocation } from "wouter";
 
 interface TopNavProps {
   onSearchOpen: () => void;
 }
 
-export default function TopNav({ onSearchOpen }: TopNavProps) {
-  return (
-    <header className="flex flex-col w-full">
-      {/* NETWORK BAR */}
-      <div className="bg-[#121212] text-white/80 h-7 flex items-center justify-between px-4 text-[10px] sm:text-[11px] font-medium uppercase tracking-wider">
-        <div className="flex items-center space-x-2 sm:space-x-3 overflow-x-auto whitespace-nowrap hide-scrollbar">
-          <span className="hover:text-white cursor-pointer font-bold">NDTV</span>
-          <span className="text-border">|</span>
-          <span className="hover:text-white cursor-pointer">WORLD</span>
-          <span className="text-border">|</span>
-          <span className="hover:text-white cursor-pointer">PROFIT</span>
-          <span className="text-border">|</span>
-          <span className="hover:text-white cursor-pointer text-[12px]">हिं</span>
-          <span className="text-border">|</span>
-          <span className="hover:text-white cursor-pointer">MOVIES</span>
-          <span className="text-border">|</span>
-          <span className="hover:text-white cursor-pointer">CRICKET</span>
-          <span className="text-border">|</span>
-          <span className="hover:text-white cursor-pointer">FOOD</span>
-          <span className="text-border">|</span>
-          <span className="hover:text-white cursor-pointer hidden sm:inline">LIFESTYLE</span>
-          <span className="text-border hidden sm:inline">|</span>
-          <span className="hover:text-white cursor-pointer hidden sm:inline">HEALTH</span>
-          <span className="text-border hidden md:inline">|</span>
-          <span className="hover:text-white cursor-pointer hidden md:inline">TECH</span>
-          <span className="text-border hidden lg:inline">|</span>
-          <span className="hover:text-white cursor-pointer hidden lg:inline">GAMES</span>
-          <span className="text-border hidden lg:inline">|</span>
-          <span className="hover:text-white cursor-pointer hidden xl:inline">SHOPPING</span>
-        </div>
-        <div className="flex items-center space-x-3 shrink-0 ml-4">
-          <Search className="w-3.5 h-3.5 cursor-pointer hover:text-white" onClick={onSearchOpen} data-testid="button-search" />
-        </div>
-      </div>
+const NAV = [
+  { href: "/live", label: "Live TV" },
+  { href: "/latest", label: "Latest" },
+  { href: "/india", label: "India" },
+  { href: "/world", label: "World" },
+  { href: "/business", label: "Business" },
+  { href: "/sports", label: "Sports" },
+  { href: "/tech", label: "Tech" },
+  { href: "/channels", label: "Channels" },
+] as const;
 
-      {/* MAIN NAV BAR */}
-      <div className="bg-black text-white h-[44px] flex items-center justify-between px-4 sticky top-0 z-50">
-        <div className="flex items-center gap-4">
-          <button className="p-1 hover:bg-white/10 rounded-sm transition-colors" data-testid="button-menu">
+export default function TopNav({ onSearchOpen }: TopNavProps) {
+  const [location] = useLocation();
+  const path = location.split("?")[0] ?? location;
+
+  return (
+    <header className="flex flex-col w-full border-b border-border bg-[#0a0f1a]">
+      <div className="max-w-7xl mx-auto w-full px-4 h-14 flex items-center justify-between gap-4">
+        <div className="flex items-center gap-3">
+          <button
+            type="button"
+            className="p-2 hover:bg-white/5 rounded-md transition-colors lg:hidden"
+            data-testid="button-menu"
+            aria-label="Menu"
+          >
             <Menu className="w-5 h-5" />
           </button>
-          <Link href="/" className="flex items-center leading-none" data-testid="link-home">
-            <span className="text-white font-black text-xl tracking-tight">ND</span>
-            <span className="text-primary font-black text-xl tracking-tight">TV</span>
+          <Link href="/" className="flex items-center gap-2" data-testid="link-home">
+            <span className="flex h-8 w-8 items-center justify-center rounded-md bg-primary text-primary-foreground font-black text-sm">
+              NP
+            </span>
+            <span className="flex flex-col leading-none">
+              <span className="text-white font-black text-lg tracking-tight">NewsPro</span>
+              <span className="text-[10px] text-muted-foreground uppercase tracking-widest">
+                Your briefing
+              </span>
+            </span>
           </Link>
         </div>
 
-        <nav className="hidden md:flex items-center space-x-4 text-[13px] font-semibold tracking-wide">
-          <Link href="/live" className="flex items-center gap-1.5 text-white hover:text-primary transition-colors cursor-pointer group">
-            <span className="w-2 h-2 rounded-full bg-primary animate-pulse-live shadow-[0_0_8px_rgba(226,0,26,0.8)]"></span>
-            Live TV <span className="text-[10px] text-white/50 group-hover:text-primary/70">▾</span>
-          </Link>
-          <span className="text-border h-3 w-px bg-border"></span>
-          <Link href="/latest" className="hover:text-white text-white/90 transition-colors">Latest</Link>
-          <span className="text-border h-3 w-px bg-border"></span>
-          <Link href="/india" className="hover:text-white text-white/90 transition-colors flex items-center gap-1">India <span className="text-[10px] text-white/50">▾</span></Link>
-          <span className="text-border h-3 w-px bg-border"></span>
-          <Link href="/world" className="hover:text-white text-white/90 transition-colors">World</Link>
-          <span className="text-border h-3 w-px bg-border"></span>
-          <Link href="/videos" className="hover:text-white text-white/90 transition-colors">Videos</Link>
-          <span className="text-border h-3 w-px bg-border"></span>
-          <Link href="/opinion" className="hover:text-white text-white/90 transition-colors">Opinion</Link>
-          <span className="text-border h-3 w-px bg-border"></span>
-          <Link href="/cities" className="hover:text-white text-white/90 transition-colors flex items-center gap-1">Cities <span className="text-[10px] text-white/50">▾</span></Link>
+        <nav className="hidden xl:flex items-center gap-1">
+          {NAV.map((item) => {
+            const active = path === item.href;
+            return (
+              <Link
+                key={item.href}
+                href={item.href}
+                className={`px-2.5 py-1.5 rounded-md text-[12px] font-semibold transition-colors ${
+                  active
+                    ? "bg-primary/15 text-sky-300"
+                    : "text-white/80 hover:text-white hover:bg-white/5"
+                }`}
+              >
+                {item.label === "Live TV" ? (
+                  <span className="inline-flex items-center gap-1">
+                    <Radio className="w-3 h-3 text-red-400" />
+                    {item.label}
+                  </span>
+                ) : (
+                  item.label
+                )}
+              </Link>
+            );
+          })}
         </nav>
 
-        <div className="flex items-center gap-4">
-          <div className="hidden sm:flex items-center gap-1 text-[12px] text-muted-foreground mr-2">
-            <span>Delhi</span>
-            <span className="text-sm">☁</span>
-            <span>38°C</span>
-          </div>
-          <button className="hover:text-primary transition-colors" data-testid="button-grid">
-            <Grid className="w-4 h-4" />
-          </button>
-          <button className="w-7 h-7 bg-card border border-border rounded-full flex items-center justify-center hover:border-primary transition-colors" data-testid="button-user">
-            <User className="w-4 h-4 text-muted-foreground" />
-          </button>
-        </div>
+        <NavActions onSearchOpen={onSearchOpen} />
       </div>
+
+      <nav className="xl:hidden flex gap-1 overflow-x-auto px-4 pb-2 hide-scrollbar">
+        {NAV.map((item) => (
+          <Link
+            key={item.href}
+            href={item.href}
+            className="shrink-0 px-3 py-1 text-[12px] font-semibold rounded-full bg-card border border-border text-white/90 hover:border-primary/50"
+          >
+            {item.label}
+          </Link>
+        ))}
+      </nav>
     </header>
+  );
+}
+
+function NavActions({ onSearchOpen }: { onSearchOpen: () => void }) {
+  return (
+    <div className="flex items-center gap-2">
+      <Link
+        href="/publish"
+        className="hidden sm:inline-flex items-center gap-1.5 px-3 py-1.5 rounded-md bg-primary text-primary-foreground text-[12px] font-bold hover:opacity-90 transition-opacity"
+      >
+        <PenLine className="w-3.5 h-3.5" />
+        Publish
+      </Link>
+      <button
+        type="button"
+        onClick={onSearchOpen}
+        className="flex items-center gap-2 px-3 py-1.5 rounded-md border border-border bg-card/50 text-muted-foreground hover:text-white hover:border-primary/40 text-[12px] transition-colors"
+        data-testid="button-search"
+      >
+        <Search className="w-4 h-4" />
+        <span className="hidden sm:inline">Search</span>
+      </button>
+    </div>
   );
 }

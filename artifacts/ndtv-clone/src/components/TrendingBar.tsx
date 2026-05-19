@@ -1,40 +1,55 @@
-import { Link } from "wouter";
+import { useLocation } from "wouter";
+import { TRENDING_TOPICS, trendingHref } from "@/lib/trending";
+import { useAppNavigate, useTopicParam } from "@/hooks/use-search-params";
 
-const TRENDING_LINKS = [
-  "Iran War",
-  "IPL 2026",
-  "Gold Price",
-  "Silver Price",
-  "Pakistan News",
-  "PM Modi",
-  "Rupee vs Dollar",
-  "Stock Market"
-];
+function pillClass(active: boolean) {
+  return `inline-block px-2.5 py-0.5 rounded-full text-[12px] font-medium whitespace-nowrap transition-colors ${
+    active
+      ? "bg-primary text-primary-foreground font-semibold"
+      : "text-white/85 bg-secondary hover:bg-primary/20 hover:text-sky-200"
+  }`;
+}
 
 export default function TrendingBar() {
+  const [location] = useLocation();
+  const pathname = location.split("?")[0] ?? location;
+  const activeTopic = useTopicParam();
+  const go = useAppNavigate();
+
   return (
-    <div className="w-full bg-muted border-l-4 border-l-primary flex items-center h-[34px] overflow-hidden text-[13px]">
-      <div className="bg-primary text-primary-foreground font-bold h-full flex items-center px-3 text-[11px] uppercase tracking-wider shrink-0 shadow-lg z-10 relative">
-        Trending Links <span className="ml-1.5 text-[9px]">▶</span>
-        {/* Right pointing triangle to create flag effect */}
-        <div className="absolute -right-2 top-0 border-y-[17px] border-y-transparent border-l-[8px] border-l-primary hidden md:block"></div>
-      </div>
-      
-      <div className="flex-1 overflow-x-auto hide-scrollbar flex items-center md:ml-4 ml-2 px-2">
-        <ul className="flex items-center space-x-4 whitespace-nowrap">
-          {TRENDING_LINKS.map((link, i) => (
-            <li key={i} className="flex items-center">
-              <Link 
-                href={`/topic/${link.toLowerCase().replace(/ /g, "-")}`}
-                className="text-white hover:text-primary transition-colors font-medium whitespace-nowrap"
-              >
-                {link}
-              </Link>
-              {i < TRENDING_LINKS.length - 1 && (
-                <span className="text-border mx-4 text-[10px]">|</span>
-              )}
-            </li>
-          ))}
+    <div className="w-full bg-card/80 border-b border-border">
+      <div className="max-w-7xl mx-auto px-4 py-2 flex items-center gap-3 overflow-x-auto hide-scrollbar">
+        <span className="shrink-0 text-[10px] font-bold uppercase tracking-widest text-accent">
+          Now trending
+        </span>
+        <ul className="flex items-center gap-2">
+          {TRENDING_TOPICS.map((item) => {
+            const href = trendingHref(item);
+            const isActive =
+              pathname === item.path &&
+              activeTopic?.toLowerCase() === item.topic.toLowerCase();
+            return (
+              <li key={item.id}>
+                <button type="button" onClick={() => go(href)} className={pillClass(isActive)}>
+                  {item.label}
+                </button>
+              </li>
+            );
+          })}
+          <li>
+            <button type="button" onClick={() => go("/live")} className={pillClass(pathname === "/live")}>
+              Live TV
+            </button>
+          </li>
+          <li>
+            <button
+              type="button"
+              onClick={() => go("/channels")}
+              className={pillClass(pathname === "/channels")}
+            >
+              Channel guide
+            </button>
+          </li>
         </ul>
       </div>
     </div>
